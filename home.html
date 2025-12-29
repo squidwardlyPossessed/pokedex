@@ -11,14 +11,44 @@
 <body>
     <h1>Welcome to the Pokedex</h1>
     <hr>
+        <input type="text" id="pokemon-input" placeholder="Enter name or ID (e.g., 1 or pikachu)">
+        <button id="search-button">Search Pokedex!</button>
     <main>
+        <div class="container">
+            <div class="pokemon-container">
+                <h2 class="pokemon-name-display"></h2>
+                <img class="pokemon-image" src="" alt="Pokémon Artwork">
+                <p class="stats-display"></p>
+            </div>
+            <div class="pokemon-container">
+                <h2 class="pokemon-name-display"></h2>
+                <img class="pokemon-image" src="" alt="Pokémon Artwork">
+                <p class="stats-display"></p>
+            </div>
+            <div class="pokemon-container">
+                <h2 class="pokemon-name-display"></h2>
+                <img class="pokemon-image" src="" alt="Pokémon Artwork">
+                <p class="stats-display"></p>
+            </div>
+            <div class="pokemon-container">
+                <h2 class="pokemon-name-display"></h2>
+                <img class="pokemon-image" src="" alt="Pokémon Artwork">
+                <p class="stats-display"></p>
+            </div>
+       </div>
+
     </main>
-    <input type="text" id="pokemon-input" placeholder="Enter name or ID (e.g., 1 or pikachu)">
-    <button id="search-button">Search Pokedex!</button>
-    <div id="pokemon-data-display">
-        <h2 id="pokemon-name-display"></h2>
-        <img id="pokemon-image" src="" alt="Pokémon Artwork" style="width:250px;">
-    </div>
-</body>
+       <div class="pokemon-modal hidden" style="border: 1px solid;">
+            <div class="pokemon-container">
+                <h2 class="pokemon-name-display"></h2>
+                <img class="pokemon-image" src="" alt="Pokémon Artwork">
+                <p class="stats-display"></p>
+            </div>
+       </div>
+      <footer>
+        <p>&copy; 2024 Pokedex App</p>
+      </footer> 
+    </body>
     
+
 </html>

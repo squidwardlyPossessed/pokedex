@@ -7,6 +7,7 @@ async function getPokemonDetails(identifier) {
         }
         const pokemonData = await response.json();
         console.log("mashaAllah. Data successfully fetched for:", pokemonData.name);
+        // console.log(pokemonData);
         return pokemonData;
     } catch (error) {
         console.error("Fetch operation failed:", error);
@@ -14,20 +15,29 @@ async function getPokemonDetails(identifier) {
     }
 }
 
-function updateDisplay(data) {
-    document.getElementById('pokemon-name-display').textContent = data.name.toUpperCase();
-    const imageUrl = data.sprites.other['official-artwork'].front_default;
-    
-    document.getElementById('pokemon-image').src = imageUrl;
-    document.getElementById('pokemon-image').alt = `Official artwork of ${data.name}`;
-}
 
+const container = document.querySelector("container");
 const searchButton = document.getElementById('search-button');
 const pokemonInput = document.getElementById('pokemon-input');
+const pokemonImg = document.getElementById('pokemon-image');
+
+function updateDisplay(data) {
+    document.getElementById('pokemon-name-display').textContent = data.name.toUpperCase();
+    pokemonImg.src = data.sprites.other['official-artwork'].front_default;
+
+    const statsDisplay = document.getElementById('stats-display');
+    statsDisplay.innerHTML = '';
+    data.stats.forEach(stat => {
+        const statElement = document.createElement('li');
+        statElement.textContent = `${stat.stat.name.toUpperCase()}: ${stat.base_stat}`;
+        statsDisplay.appendChild(statElement);
+    });
+}
 
 searchButton.addEventListener('click', () => {
+    const hover = document.querySelector('.pokemon-modal');
+    hover.classList.remove('hidden');
     const identifier = pokemonInput.value.trim(); 
-
     if (identifier) {
         getPokemonDetails(identifier)
             .then(data => {
@@ -40,4 +50,19 @@ searchButton.addEventListener('click', () => {
     } else {
         alert("Please enter a Pokémon name or ID!");
     }
+});
+
+const pokemonDivs = document.querySelectorAll('.pokemon-container');
+pokemonDivs.forEach((div, index) => {
+    const randomId = Math.floor(Math.random() * 1025) + 1;
+    getPokemonDetails(randomId)
+        .then(data => {
+            const nameDisplay = div.querySelector('.pokemon-name-display');
+            const imgDisplay = div.querySelector('.pokemon-image');
+            nameDisplay.textContent = data.name.toUpperCase();
+            imgDisplay.src = data.sprites.other['official-artwork'].front_default;
+        })
+        .catch(error => {
+            console.error("Failed to fetch Pokémon details for container", index + 1, ":", error);
+        });
 });
