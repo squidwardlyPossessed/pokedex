@@ -21,11 +21,17 @@ const searchButton = document.getElementById('search-button');
 const pokemonInput = document.getElementById('pokemon-input');
 const pokemonImg = document.getElementById('pokemon-image');
 
+
 function updateDisplay(data) {
-    document.getElementById('pokemon-name-display').textContent = data.name.toUpperCase();
+    const modal = document.querySelector('.pokemon-modal');
+    
+    const nameDisplay = modal.querySelector('.pokemon-name-display');
+    const pokemonImg = modal.querySelector('.pokemon-image');
+    const statsDisplay = modal.querySelector('.stats-display');
+
+    nameDisplay.textContent = data.name.toUpperCase();
     pokemonImg.src = data.sprites.other['official-artwork'].front_default;
 
-    const statsDisplay = document.getElementById('stats-display');
     statsDisplay.innerHTML = '';
     data.stats.forEach(stat => {
         const statElement = document.createElement('li');
@@ -59,10 +65,21 @@ pokemonDivs.forEach((div, index) => {
         .then(data => {
             const nameDisplay = div.querySelector('.pokemon-name-display');
             const imgDisplay = div.querySelector('.pokemon-image');
+            const statsDisplay = div.querySelector('.stats-display');
+
             nameDisplay.textContent = data.name.toUpperCase();
             imgDisplay.src = data.sprites.other['official-artwork'].front_default;
-        })
-        .catch(error => {
-            console.error("Failed to fetch Pokémon details for container", index + 1, ":", error);
+            const statsText = data.stats
+                .map(stat => `${stat.stat.name.toUpperCase()}: ${stat.base_stat}`)
+                .join('\n');
+            
+            statsDisplay.textContent = statsText;
         });
+});
+
+const closeBtn = document.getElementById('close-modal-btn');
+
+closeBtn.addEventListener('click', () => {
+    const modal = document.querySelector('.pokemon-modal');
+    modal.classList.add('hidden');
 });

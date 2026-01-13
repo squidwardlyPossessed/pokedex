@@ -24,7 +24,7 @@ h1 {
 .container div {
     text-align: center;
     width: 300px;
-    height: 300px;
+    height: 500px;
     margin: 10px auto;
     border: 1px solid;
     background-color: rgb(171, 165, 165);
@@ -62,10 +62,9 @@ h1 {
     margin: auto;
 }
 
-.pokemon-modal div{
+.pokemon-modal nav{
     display: flex;
     flex-direction: column;
-    /* justify-content: center; */
     align-items: center;
     height: 100%;
     width: 100%;
@@ -79,4 +78,25 @@ footer {
     bottom: 0;
     width: 100%;
     background-color: rgb(255, 255, 95);
+}
+
+.stats-display {
+    white-space: pre-line;
+    font-size: 14px;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #333;
+}
+
+.close-btn:hover {
+    color: #ff0000;
 }
